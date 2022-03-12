@@ -27,7 +27,7 @@ public final class DownButNotOut extends JavaPlugin {
         Metrics metrics = new Metrics(this, 14605);
 
         getCommand("setreviveclicks").setExecutor(new SetReviveClicks());
-        getCommand("dnboreloadconfig").setExecutor(new ReloadConfig());
+        getCommand("dbnoreloadconfig").setExecutor(new ReloadConfig());
         getCommand("setbleedouttime").setExecutor(new SetBleedOutTime());
         getCommand("reviveplayer").setExecutor(new RevivePlayer());
         getCommand("removedbnostands").setExecutor(new RemoveStands());
