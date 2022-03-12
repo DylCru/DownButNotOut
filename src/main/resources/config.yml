@@ -1,0 +1,14 @@
+# Enables/Disables players being downed instead of dying
+enable-downs: true
+
+# The amount of time (in seconds) it takes for a downed player to bleed out (die)
+bleed-out-time: 15
+
+# The amount of right clicks needed to revive a downed player
+clicks-to-revive: 10
+
+# Whether the player can take damage from mobs while being down
+damage-while-down: false
+
+# Whether to play sounds while reviving or a player is down
+play-sounds: true

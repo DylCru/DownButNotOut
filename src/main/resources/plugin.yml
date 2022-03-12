@@ -1,0 +1,20 @@
+name: DownButNotOut
+version: 1.0
+main: me.rainstxrm.downbutnotout.DownButNotOut
+api-version: 1.18
+commands:
+  setreviveclicks:
+    description: Sets the amount of clicks needed to revive a player
+    usage: /<command>
+  dnboreloadconfig:
+    description: Reloads the plugin's config
+    usage: /<command>
+  setbleedouttime:
+    description: Sets the amount of time (in seconds) before the player bleeds out (dies)
+    usage: /<command>
+  reviveplayer:
+    description: Revives a downed player
+    usage: /<command>
+  removedbnostands:
+    description: Removes plugin related armourstands
+    usage: /<commands>
