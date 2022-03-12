@@ -52,6 +52,66 @@ public class DownedEvents implements Listener {
     }
 
     @EventHandler
+    public void onDamageWithNoCause(EntityDamageEvent e){
+        if (DownButNotOut.plugin.getConfig().getBoolean("enable-downs")){
+            if (!(e.getEntity() instanceof Player)){
+                return;
+            }
+            Player player = (Player) e.getEntity();
+
+            if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)){
+                return;
+            }
+
+            if (KOHandler.getDownedPlayers().contains(player.getUniqueId())){
+                return;
+            }
+
+            String cause = null;
+
+            if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
+                cause = "a big fall";
+            } else if (e.getCause().equals(EntityDamageEvent.DamageCause.DROWNING) ||
+                    e.getCause().equals(EntityDamageEvent.DamageCause.SUFFOCATION)){
+                cause = "a lack of oxygen";
+            } else if (e.getCause().equals(EntityDamageEvent.DamageCause.FIRE)
+            || e.getCause().equals(EntityDamageEvent.DamageCause.LAVA)
+            || e.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)){
+                cause = "being too hot";
+            } else if (e.getCause().equals(EntityDamageEvent.DamageCause.FLY_INTO_WALL)) {
+                cause = "not looking where they were going";
+            }
+
+
+            double healthOnAttack = player.getHealth();
+            double attackDamage = e.getDamage();
+
+            if (healthOnAttack - attackDamage <= 0){
+                e.setDamage(0);
+                player.setHealth(20);
+                KOHandler.KOPlayer(player.getUniqueId());
+                KOHandler.spawnStand(player);
+                player.sendTitle(ChatColor.RED + "You have been downed.", ChatColor.RED + "Hopefully someone is able to revive you!" , 0, 40, 0);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.5f, 0.5f);
+
+                for (Player p : Bukkit.getOnlinePlayers()){
+                    if (cause == null){
+                        p.sendMessage(player.getDisplayName() + " was downed.");
+                    } else {
+                        p.sendMessage(player.getDisplayName() + " was downed by " + cause);
+                    }
+                }
+
+                if (player.getLocation().clone().add(0,1,0).getBlock().getType().equals(Material.AIR)){
+                    player.getLocation().clone().add(0,1,0).getBlock().setType(Material.BARRIER);
+                }
+                player.setSwimming(true);
+                KOHandler.playerCountDown(player, player.getExpToLevel());
+            }
+        }
+    }
+
+    @EventHandler
     public void unKOPlayer(PlayerDeathEvent e){
         Player player = e.getEntity();
         if (KOHandler.getDownedPlayers().contains(e.getEntity().getUniqueId())){
@@ -106,4 +166,4 @@ public class DownedEvents implements Listener {
             }
         }
     }
-}
+
