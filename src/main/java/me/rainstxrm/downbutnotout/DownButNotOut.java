@@ -23,6 +23,8 @@ public final class DownButNotOut extends JavaPlugin {
             getLogger().log(Level.WARNING, "The bleed out time has been set to 0 in the config! PLayers will not be downed and instead instantly die.");
         }
 
+        getLogger().log(Level.INFO, "DBNO is online!");
+
         saveDefaultConfig();
         Metrics metrics = new Metrics(this, 14605);
 
@@ -31,10 +33,5 @@ public final class DownButNotOut extends JavaPlugin {
         getCommand("setbleedouttime").setExecutor(new SetBleedOutTime());
         getCommand("reviveplayer").setExecutor(new RevivePlayer());
         getCommand("removedbnostands").setExecutor(new RemoveStands());
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 }
