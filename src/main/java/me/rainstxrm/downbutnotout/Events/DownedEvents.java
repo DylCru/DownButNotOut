@@ -46,7 +46,7 @@ public class DownedEvents implements Listener {
                     player.getLocation().clone().add(0,1,0).getBlock().setType(Material.BARRIER);
                 }
                 player.setSwimming(true);
-                KOHandler.playerCountDown(player, player.getExpToLevel());
+                KOHandler.playerCountDown(player);
             }
         }
     }
@@ -106,7 +106,7 @@ public class DownedEvents implements Listener {
                     player.getLocation().clone().add(0,1,0).getBlock().setType(Material.BARRIER);
                 }
                 player.setSwimming(true);
-                KOHandler.playerCountDown(player, player.getExpToLevel());
+                KOHandler.playerCountDown(player);
             }
         }
     }
@@ -166,4 +166,4 @@ public class DownedEvents implements Listener {
             }
         }
     }
-
+}
