@@ -56,13 +56,12 @@ public class KOHandler {
         revive.setCustomName(ChatColor.GOLD + "" + ChatColor.BOLD + "Right click to revive!");
         revive.setMetadata("ReviveStand", new FixedMetadataValue(DownButNotOut.plugin, "Revivestand"));
     }
-    public static void playerCountDown(Player player, int xp){
+    public static void playerCountDown(Player player){
         new BukkitRunnable(){
             int timer = DownButNotOut.plugin.getConfig().getInt("bleed-out-time");
             @Override
             public void run() {
                 if(!getDownedPlayers().contains(player.getUniqueId())){
-                    player.setLevel(xp);
                     cancel();
                 }
 
